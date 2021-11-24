@@ -41,7 +41,7 @@ int main()
     char CinSearch[1][100];
     int account_number[2];
     char account_name[100][30];
-    char fid_name[100][30];
+    double FidMontant[100];
     double montant[100];
     double NMontant[100];
     double mRetrait,mDepot,R,MUser;
@@ -70,9 +70,9 @@ debut:
 
             if (account_number[0]==0){
 
-                    printf("Attention !!! : Il n y a pas de compte, veuillez en creer un nouveau \n");
+                printf("Attention !!! : Il n y a pas de compte, veuillez en creer un nouveau \n");
 
-                    goto debut;
+                goto debut;
             }
 
             if(choice1==3){
@@ -236,260 +236,229 @@ system("cls");
 
 affichage:
 
-            SousMenuAffichage();
-            printf("\noption : ");
-            scanf("%d",&AffichageChoix);
-            printf("\n ");
+    SousMenuAffichage();
+    printf("\noption : ");
+    scanf("%d",&AffichageChoix);
+    printf("\n ");
 
-            for(i=0 ; i<C ;i++){
-                RMontant[i] = montant[i];
-            }
-
-
-            if(AffichageChoix==1){
-
-                goto Ascendant;
-            }
-
-            if(AffichageChoix==2){
-
-                goto Descendant;
-            }
-
-            if(AffichageChoix==3){
-
-                goto AscendantM;
-            }
-
-            if(AffichageChoix==4){
-
-                goto DescendantM;
-            }
-
-            if(AffichageChoix==5){
-
-                goto RechercheCIN;
-            }
-
-
-            if(AffichageChoix==6){
-
-                goto debut;
-            }
+    for(i=0 ; i<C ;i++){      //CHanger les montant au nouveau tableau
+        RMontant[i] = montant[i];
+    }
+    if(AffichageChoix==1){
+        goto Ascendant;
+    }
+    if(AffichageChoix==2){
+        goto Descendant;
+    }
+    if(AffichageChoix==3){
+        goto AscendantM;
+    }
+    if(AffichageChoix==4){
+        goto Descendant;
+    }
+    if(AffichageChoix==5){
+        goto RechercheCIN;
+    }
+    if(AffichageChoix==6){
+        goto debut;
+    }
 //quitte l'application
 
-
-            if (AffichageChoix==7){
-                    goto exit;
-            }
-             if (AffichageChoix>7 || AffichageChoix<1){
-            printf("Erreur ! : Cette option n'existe pas \n");
-                goto affichage;
-
-        }
+    if (AffichageChoix==7){
+        goto exit;
+    }
+    if (AffichageChoix>7 || AffichageChoix<1){
+        printf("Erreur ! : Cette option n'existe pas \n");
+        goto affichage;
+    }
 
 
 Ascendant:
 
-
-             for(i=0 ; i<C ;i++){
-
-                   for(j=0; j<C-1 ; j++){
-
-                        if (RMontant[j]>RMontant[j+1]){
-                            R=RMontant[j+1];
-                            RMontant[j+1]=RMontant[j];
-                            RMontant[j]=R;
-                        }
-                    }
-             }
+    for(i=0 ; i<C ;i++){
+        for(j=0; j<C-1 ; j++){
+            if (RMontant[j]>RMontant[j+1]){
+                R=RMontant[j+1];
+                RMontant[j+1]=RMontant[j];
+                RMontant[j]=R;
+            }
+        }
+    }
 
 system("cls");
-            printf("\n");
-            for(i=0 ; i<C ;i++){
-                printf("\t%.2lf",RMontant[i]);
-            }
-             printf("\n\n\n");
 
+    printf("\n");
+    for(i=0 ; i<C ;i++){
+        printf("\t%.2lf",RMontant[i]);
+    }
+    printf("\n\n\n");
 
-
-            goto affichage;
+    goto affichage;
 
 Descendant:
 
-
-             for(i=0 ; i<C ;i++){
-
-                   for(j=0; j<C-1 ; j++){
-
-                        if (RMontant[j]<RMontant[j+1]){
-                            R=RMontant[j+1];
-                            RMontant[j+1]=RMontant[j];
-                            RMontant[j]=R;
-                    }
-               }
+    for(i=0 ; i<C ;i++){
+        for(j=0; j<C-1 ; j++){
+            if (RMontant[j]<RMontant[j+1]){
+                R=RMontant[j+1];
+                RMontant[j+1]=RMontant[j];
+                RMontant[j]=R;
             }
+        }
+    }
 
 system("cls");
-            printf("\n");
-            for(i=0 ; i<C ;i++){
-                printf("\t%.2lf",RMontant[i]);
-            }
-            printf("\n\n\n");
 
-            goto affichage;
+    printf("\n");
+    for(i=0 ; i<C ;i++){
+        printf("\t%.2lf",RMontant[i]);
+    }
+    printf("\n\n\n");
+
+    goto affichage;
 
 AscendantM:
 
     system("cls");
 
-            printf("entrer un montant :");
-            scanf("%lf",&MUser);
+    printf("entrer un montant :");
+    scanf("%lf",&MUser);
 
+    for(i=0 ; i<C ;i++){
+        for(j=0; j<C-1 ; j++){
+            if (RMontant[j]>RMontant[j+1]){
+                R=RMontant[j+1];
+                RMontant[j+1]=RMontant[j];
+                RMontant[j]=R;
+            }
+        }
+    }
 
+    printf("\n");
+    for(i=0 ; i<C ;i++){
+        if (MUser<RMontant[i]){
+            printf("\t%.2lf",RMontant[i]);
+        }
+    }
 
-            for(i=0 ; i<C ;i++){
-
-                   for(j=0; j<C-1 ; j++){
-
-                        if (RMontant[j]>RMontant[j+1]){
-                            R=RMontant[j+1];
-                            RMontant[j+1]=RMontant[j];
-                            RMontant[j]=R;
-                        }
-                    }
-             }
-
-            printf("\n");
-             for(i=0 ; i<C ;i++){
-                if (MUser<RMontant[i]){
-                    printf("\t%.2lf",RMontant[i]);
-                }
-             }
-
-             goto affichage;
-
-
-
+    goto affichage;
 
 DescendantM:
 
     system("cls");
 
-                    printf("entrer un montant :");
-            scanf("%lf",&MUser);
+    printf("entrer un montant :");
+    scanf("%lf",&MUser);
+
+    for(i=0 ; i<C ;i++){
+        for(j=0; j<C-1 ; j++){
+            if (RMontant[j]>RMontant[j+1]){
+                R=RMontant[j+1];
+                RMontant[j+1]=RMontant[j];
+                RMontant[j]=R;
+            }
+        }
+    }
 
 
+    for(i=C-1 ; i>=0 ;i--){
+        if (MUser<RMontant[i]){
+            printf("\t%.2lf",RMontant[i]);
+        }
+    }
 
-            for(i=0 ; i<C ;i++){
-
-                   for(j=0; j<C-1 ; j++){
-
-                        if (RMontant[j]>RMontant[j+1]){
-                            R=RMontant[j+1];
-                            RMontant[j+1]=RMontant[j];
-                            RMontant[j]=R;
-                        }
-                    }
-             }
-
-
-             for(i=C-1 ; i>=0 ;i--){
-                if (MUser<RMontant[i]){
-                    printf("\t%.2lf",RMontant[i]);
-                }
-             }
-
-             goto affichage;
-
-
-
-
+    goto affichage;
 
 RechercheCIN:
+
     system("cls");
 
-            printf("entrer CIN :");
-            scanf("%s",&CinSearch[0]);
-            printf("-----------------------\n\n");
+    printf("entrer CIN :");
+    scanf("%s",&CinSearch[0]);
+    printf("-----------------------\n\n");
 
+    for ( i=0 ; i<C ; i++){
+        if (strcmp(CinSearch[0],CIN[i])==0){
+            printf("Nom             : %s\n",account_name[i]);
+            printf("Cin             : %s\n",CIN[i]);
+            printf("Montant         :%.2lf DH\n",montant[i]);
+        }
+    }
 
-            for ( i=0 ; i<C ; i++){
-
-                if (strcmp(CinSearch[0],CIN[i])==0){
-
-                    printf("Nom             : %s\n",account_name[i]);
-
-
-                    printf("Cin             : %s\n",CIN[i]);
-
-
-                    printf("Montant         :%.2lf DH\n",montant[i]);
-
-
-                }
-            }
-
-                    goto affichage;
+    goto affichage;
 
 Fidelisation:
 
-                 for(i=0 ; i<C ;i++){
-                    RMontant[i] = montant[i];
-                }
+    for(i=0 ; i<C ;i++){
+        RMontant[i] = montant[i];
+    }
 
 
-                for(i=0 ; i<C ;i++){
+    for(i=0 ; i<C ;i++){
+        for(j=0; j<C-1 ; j++){
+            if (RMontant[j]<RMontant[j+1]){
+            R=RMontant[j+1];
+            RMontant[j+1]=RMontant[j];
+            RMontant[j]=R;
+            }
+        }
+    }
 
-                   for(j=0; j<C-1 ; j++){
-
-                        if (RMontant[j]<RMontant[j+1]){
-                            R=RMontant[j+1];
-                            RMontant[j+1]=RMontant[j];
-                            RMontant[j]=R;
-                        }
-                    }
-                }
 system("cls");
 
-//CF NOMBRE DES BOUCLES
-                            if( C<3 ){
-                                CF=C;
-                            }else{
-                                CF=3;
-                            }
-//AFFICHAGE LES MONTANTS DE FIVELISATION
+//CF NOMBRE DES BOUCLES pour afficher les 3 premier montants
 
-                                printf("----------------------------------------------------------------\n");
-                for(i=0 ;i<CF ;i++){
-                    NMontant[i]=RMontant[i]+((RMontant[i]*1.3)/100);
-                        for (j=0 ; j<C ; j++){
-                            if (RMontant[i]==montant[j]){
+        if( C<3 ){
+            CF=C;
+        }else{
+            CF=3;
+        }
 
-                                printf("name : %s   -   CIN : %s  -   Nouveau Montant : %.2lf DH\n",account_name[j],CIN[j],NMontant[i]);
-                                printf("----------------------------------------------------------------\n");
-                                printf("\n");
+//trouver les 3 premiere  MONTANTS DE FIVELISATION
 
-                            }
-                        }
-                }
+    i=0;
+    j=0;
+   while (i<CF ){
+            if (RMontant[j]!=RMontant[j+1]){
+                FidMontant[i]=RMontant[j];
+                i++;
+                j++;
+            }else{
+                j++;
+            }
+        }
 
+    printf("*****************************\n");
+    printf("*  Les 3 premier montant :  *\n");
+    printf("*************************** *\n");
+    printf(" \n");
+    for (i=0 ; i<CF ;i++){
+        printf(" %d : %.2lf\n",i+1,FidMontant[i]);
+    }
+    printf(" \n");
 
 //POUR REMPLACER LANCIEN MONTANT PAR MONTANT DE FIDELISATION
 
-                for (i=0 ; i<3 ;i++){
-                    for(j=0 ; j<C ;j++){
-                        if (RMontant[i] == montant[j]){
-                            montant[j] = NMontant[i];
-                        }
-                    }
-                }
+    printf("******************************\n");
+    printf("*   Comptes beneficiaires :  *\n");
+    printf("******************************\n");
+    for (i=0 ; i<CF ;i++){
+        NMontant[i]=FidMontant[i]+((FidMontant[i]*1.3)/100);
+        for(j=0 ; j<C ;j++){
+            if (FidMontant[i] == montant[j]){
+                montant[j] = NMontant[i];
+                printf("----------------------------------------------------------------\n");
+                printf("name : %s   -   CIN : %s  -   Nouveau Montant : %.2lf DH\n",account_name[j],CIN[j],montant[j]);
+                printf("----------------------------------------------------------------\n");
+            }
+        }
+    }
 
 
 
 
 
-                    goto affichage;
+    goto debut;
 
 
 exit:
