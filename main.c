@@ -447,9 +447,9 @@ system("cls");
         for(j=0 ; j<C ;j++){
             if (FidMontant[i] == montant[j]){
                 montant[j] = NMontant[i];
-                printf("----------------------------------------------------------------\n");
-                printf("name : %s   -   CIN : %s  -   Nouveau Montant : %.2lf DH\n",account_name[j],CIN[j],montant[j]);
-                printf("----------------------------------------------------------------\n");
+                printf("----------------------------------------------------------------------------------------------\n");
+                printf("name : %s   -   CIN : %s  -   Ancien Montant : %.2lf DH  -  Nouveau Montant : %.2lf DH\n",account_name[j],CIN[j],FidMontant[i],montant[j]);
+                printf("----------------------------------------------------------------------------------------------\n");
             }
         }
     }
