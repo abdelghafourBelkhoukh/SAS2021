@@ -56,183 +56,140 @@ int main()
 
 debut:
 
-        AffichageMenu();
-        scanf("%d",&choice1);
+    AffichageMenu();
+    scanf("%d",&choice1);
 
-        if (choice1>6 || choice1<1){
-            printf("Erreur ! : Cette option n'existe pas \n");
-                goto debut;
+    if (choice1>6 || choice1<1){
+        printf("Erreur ! : Cette option n'existe pas \n");
+        goto debut;
+    }
 
-        }
 //GOTO RETRAIT ET DEPOT
 
-        while(choice1==3 || choice1==4){
-
-            if (account_number[0]==0){
-
-                printf("Attention !!! : Il n y a pas de compte, veuillez en creer un nouveau \n");
-
-                goto debut;
-            }
-
-            if(choice1==3){
-                goto operation;
-
-            }
-
-            if (choice1==4){
-                goto affichage;
-            }
+    while(choice1==3 || choice1==4){
+        if (account_number[0]==0){
+            printf("Attention !!! : Il n y a pas de compte, veuillez en creer un nouveau \n");
+            goto debut;
         }
-
+        if(choice1==3){
+            goto operation;
+        }
+        if (choice1==4){
+            goto affichage;
+        }
+    }
 
 //Introduire un compte bancaire
 
-      while (choice1==1){
-
-            printf("nom : ");
-            scanf("%s",&account_name[C]);
-
-            printf("cin : ");
-            scanf("%s",&CIN[C]);
-
-            printf("montant : ");
-            scanf("%lf",&montant[C]);
-
-            account_number[C]=1;
-                       C++;
-                      choice1-=1;    //pour sortir
-
-            goto debut;
-
-        }
-
-
+    while (choice1==1){
+        printf("nom : ");
+        scanf("%s",&account_name[C]);
+        printf("cin : ");
+        scanf("%s",&CIN[C]);
+        printf("montant : ");
+        scanf("%lf",&montant[C]);
+        account_number[C]=1;
+        C++;
+        choice1-=1;    //pour sortir
+        goto debut;
+    }
 
 //Introduire plusieurs comptes bancaires
 
-         while(choice1==2){
+    while(choice1==2){
+        printf("\nCombien de comptes : ");
+        scanf("%d",&choice2);
+        for(i=C ; i<C+choice2 ;i++){
+            printf("nom :");
+            scanf("%s",&account_name[i]);
+            printf("cin :");
+            scanf("%s",&CIN[i]);
+            printf("montant :");
+            scanf("%lf",&montant[i]);
+            printf("\n");
+            account_number[i]=1;
 
-            printf("\nCombien de comptes : ");
-            scanf("%d",&choice2);
+        }
+        C=C+choice2;            //compteur
+        choice1-=2;             //pour sortir
+        goto debut;            // retour au menu principal
 
-                for(i=C ; i<C+choice2 ;i++){
-                    printf("nom :");
-                    scanf("%s",&account_name[i]);
+    }
 
-                    printf("cin :");
-                    scanf("%s",&CIN[i]);
-
-                    printf("montant :");
-                    scanf("%lf",&montant[i]);
-                    printf("\n");
-
-                    account_number[i]=1;
-
-                }
-
-                                C=C+choice2;            //compteur
-                                choice1-=2;             //pour sortir
-                                goto debut;            // retour au menu principal
-
-                }
 //GOTO FIDELISATION
 
-                    if(choice1==5){
-
-                        goto Fidelisation;
-                    }
-
+    if(choice1==5){
+        goto Fidelisation;
+    }
 
 //quitte l'application
 
-
-                if (choice1==6){
-                    goto exit;
-
-                }
+    if (choice1==6){
+        goto exit;
+    }
 
 //Affichage le tableau des noms
+
 operation:
 system("cls");
-        printf("choiser le numero de votre compte :\n");
-        printf("----------------------\n\n");
-        for( i=0 ; i<C ; i++){
-            printf(" %d : %s \n\n",i+1,account_name[i]);
-        }
-        ope:
-        printf("option : ");
-        scanf("%d",&CompteSelect);
 
-        if(CompteSelect>C){
-
-            printf("Erreur ! : Cette option n'existe pas !!! \n\nNouveau ");
-            goto ope;
-        }
+    printf("choiser le numero de votre compte :\n");
+    printf("----------------------\n\n");
+    for( i=0 ; i<C ; i++){
+        printf(" %d : %s \n\n",i+1,account_name[i]);
+    }
+ope:
+    printf("option : ");
+    scanf("%d",&CompteSelect);
+    if(CompteSelect>C){
+        printf("Erreur ! : Cette option n'existe pas !!! \n\nNouveau ");
+        goto ope;
+    }
 
 //RETRAIT ET DEPOT
 
+    printf("\nChoisissez l operation que vous voulez :\n");
+    printf("----------------------------------------\n");
+    printf(" 1 : retrait\n");
+    printf(" 2 : depot\n\n");
+oper:
+    printf("option : ");
+    scanf("%d",&choice1);
+    if(choice1>2 || choice1<1){
+        printf("Erreur ! : Cette option n'existe pas !!! \n\nNouveau ");
+        goto oper;
+    }
 
-        printf("\nChoisissez l operation que vous voulez :\n");
-        printf("----------------------------------------\n");
-        printf(" 1 : retrait\n");
-        printf(" 2 : depot\n\n");
-        oper:
-        printf("option : ");
-        scanf("%d",&choice1);
-
-         if(choice1>2 || choice1<1){
-
-            printf("Erreur ! : Cette option n'existe pas !!! \n\nNouveau ");
-            goto oper;
+    while (choice1==1){
+        montantRetrait:
+        printf("montant retrait :");
+        scanf("%lf",&mRetrait);
+        if (mRetrait <= montant[CompteSelect-1]){
+            montant[CompteSelect-1] -= mRetrait;
+            choice1-=1;
+        }else{
+            printf("ce montant est tres grand !!!!\n\n");
+            goto montantRetrait;
         }
+    }
 
-
-
-
-
-
-       while (choice1==1){
-            montantRetrait:
-                printf("montant retrait :");
-                    scanf("%lf",&mRetrait);
-                    if (mRetrait <= montant[CompteSelect-1]){
-                        montant[CompteSelect-1] -= mRetrait;
-
-                                choice1-=1;
-                    }else{
-                       printf("ce montant est tres grand !!!!\n\n");
-                       goto montantRetrait;
-                    }
-        }
-
-        while (choice1==2){
-            printf("montant depot :");
-                    scanf("%lf",&mDepot);
-                  montant[CompteSelect-1] += mDepot;
-
-                                choice1-=2;
-        }
-
+    while (choice1==2){
+        printf("montant depot :");
+        scanf("%lf",&mDepot);
+        montant[CompteSelect-1] += mDepot;
+        choice1-=2;
+    }
 
 system("cls");
-                    printf("\n*******************************\n");
-                    printf("*     L operation a reussi    *\n");
-                    printf("*******************************\n\n");
-                    printf("Details\n");
-                    printf("--------\n\n");
-                    printf("Nom             : %s\n",account_name[CompteSelect-1]);
-
-
-                    printf("Cin             : %s\n",CIN[CompteSelect-1]);
-
-
-                    printf("Nouveau Montant :%.2lf DH\n",montant[CompteSelect-1]);
-
-
-                    goto debut;
-
-
+    printf("\n*******************************\n");
+    printf("*     L operation a reussi    *\n");
+    printf("*******************************\n\n");
+    printf("Details\n");
+    printf("--------\n\n");
+    printf("Nom             : %s\n",account_name[CompteSelect-1]);
+    printf("Cin             : %s\n",CIN[CompteSelect-1]);
+    printf("Nouveau Montant :%.2lf DH\n",montant[CompteSelect-1]);
+    goto debut;
 
 affichage:
 
@@ -454,15 +411,9 @@ system("cls");
         }
     }
 
-
-
-
-
     goto debut;
 
-
 exit:
-
 
     return 0;
 }
