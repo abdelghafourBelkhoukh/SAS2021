@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <windows.h>
+
+
+
 
 void    AffichageMenu(){
         printf("\n");
@@ -51,16 +55,19 @@ int main()
     int NouveauOperation,CF;
     C=0;
     account_number[0]=0;
-
+system ("color F4");
 // AFFICHAGE DE MENU
 
-debut:
 
+
+debut:
+system ("cls");
     AffichageMenu();
     scanf("%d",&choice1);
 
     if (choice1>6 || choice1<1){
         printf("Erreur ! : Cette option n'existe pas \n");
+        system("pause");
         goto debut;
     }
 
@@ -69,6 +76,7 @@ debut:
     while(choice1==3 || choice1==4){
         if (account_number[0]==0){
             printf("Attention !!! : Il n y a pas de compte, veuillez en creer un nouveau \n");
+            system("pause");
             goto debut;
         }
         if(choice1==3){
@@ -91,6 +99,7 @@ debut:
         account_number[C]=1;
         C++;
         choice1-=1;    //pour sortir
+        system("pause");
         goto debut;
     }
 
@@ -111,7 +120,8 @@ debut:
 
         }
         C=C+choice2;            //compteur
-        choice1-=2;             //pour sortir
+        choice1-=2;
+        system("pause");          //pour sortir de la boucle
         goto debut;            // retour au menu principal
 
     }
@@ -189,6 +199,7 @@ system("cls");
     printf("Nom             : %s\n",account_name[CompteSelect-1]);
     printf("Cin             : %s\n",CIN[CompteSelect-1]);
     printf("Nouveau Montant :%.2lf DH\n",montant[CompteSelect-1]);
+    system("pause");
     goto debut;
 
 affichage:
@@ -410,7 +421,7 @@ system("cls");
             }
         }
     }
-
+    system("pause");
     goto debut;
 
 exit:
